@@ -42,6 +42,17 @@ namespace DM.REST
             return matchesList;
         }
 
+        public List<Hero> GetHeroes()
+        {
+            List<Hero> heroes = new List<Hero>();
+            Task<HttpResponseMessage> t = _client.GetAsync(_client.BaseAddress + "heroes");
+            if (t.Result.IsSuccessStatusCode)
+            {
+                heroes = JsonConvert.DeserializeObject<List<Hero>>(t.Result.Content.ReadAsStringAsync().Result);
+            }
+            return heroes;
+        }
+
         public static RestService Instance { get { return NestedRestService.instance; } }
         private class NestedRestService
         {
