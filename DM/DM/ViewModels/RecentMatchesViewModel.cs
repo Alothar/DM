@@ -2,6 +2,7 @@
 using DM.JSON;
 using DM.ViewClasses;
 using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,25 +10,26 @@ using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using static DM.App;
 
 namespace DM.ViewModels
 {
     class RecentMatchesViewModel
     {
-        public RecentMatchesViewModel(List<MatchCropped> recentMatches, List<HeroObject> heroes)
+        public RecentMatchesViewModel(List<MatchCropped> recentMatches)
         {
             RecentMatches = recentMatches;
-            HeroObjects = heroes;
             initializeRecentMatches();
         }
         public List<MatchCropped> RecentMatches { get; set; }
         public ObservableCollection<RecentMatch_to_display> RecentMacthesToDisplay { get; } = new ObservableCollection<RecentMatch_to_display>();
 
-        public List<HeroObject> HeroObjects { get; set; }
-
-        private HeroObject getHero(int heroID)
+        private HeroesDB getHero(int heroID)
         {
-            return HeroObjects.Find((HeroObject h) => { return h.id == heroID; });
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "HeroesSQLite.db3");
+            var db = new SQLiteConnection(dbPath);
+            var hero = db.Get<HeroesDB>(heroID);
+            return hero;
         }
 
         private void initializeRecentMatches()

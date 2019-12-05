@@ -8,16 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static DM.App;
 
 namespace DM.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RecentMatchesPage : ContentPage
     {
-        public RecentMatchesPage(List<MatchCropped> recentMatches, List<HeroObject> heroes)
+        public RecentMatchesPage(List<MatchCropped> recentMatches)
         {
             InitializeComponent();
-            RecentMatchesViewModel recentMatchesViewModel = new RecentMatchesViewModel(recentMatches, heroes);
+            RecentMatchesViewModel recentMatchesViewModel = new RecentMatchesViewModel(recentMatches);
             BindingContext = recentMatchesViewModel;
         }
     }

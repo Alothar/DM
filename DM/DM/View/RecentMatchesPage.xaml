@@ -40,12 +40,12 @@
 
                                 <StackLayout Grid.Column="0">
                                     <StackLayout Orientation="Horizontal" Grid.Row="0">
-                                        <ffimageloading:CachedImage x:Name = "HeroAvatar" Source="{Binding hero.hero_avatar,
+                                        <ffimageloading:CachedImage x:Name = "HeroAvatar" Source="{Binding hero.Resource,
                                                     Converter={StaticResource imagePathToImageConverter}}"/>
-                                        <Label x:Name="HeroName" Text="{Binding hero.localized_name}"
+                                        <Label x:Name="HeroName" Text="{Binding hero.Localized_name}"
                                                        TextColor="Black" FontSize="Medium"
-                                                       HorizontalTextAlignment="Center"
-                                                       VerticalTextAlignment="Center"/>
+                                                       HorizontalOptions="Center"
+                                                       VerticalOptions="Center"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" Grid.Row="1">
                                         <Label x:Name="TeamWon" FormattedText="{Binding match, Converter={StaticResource isWonConverter}}"

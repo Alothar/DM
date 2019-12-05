@@ -31,20 +31,10 @@ namespace DM.ViewModels
             RestService rest = RestService.Instance;
 
             List<MatchCropped> recentMatches = rest.GetPlayerRecentMatches(Id_holder.Instance.Steam_32_id + "/recentMatches");
-            List<HeroObject> heroes = InitiateHeroes();
+            // List<HeroObject> heroes = InitiateHeroes();
             //Navigate to recent matches page
-             App.Current.MainPage.Navigation.PushAsync(new RecentMatchesPage(recentMatches, heroes));
+             App.Current.MainPage.Navigation.PushAsync(new RecentMatchesPage(recentMatches));
             
-        }
-
-        private List<HeroObject> InitiateHeroes()
-        {
-            List<HeroObject> heroes = new List<HeroObject>();
-            Stream stream = this.GetType().GetTypeInfo().Assembly.GetManifestResourceStream("DM.Resources.Heroes.json");
-            StreamReader reader = new StreamReader(stream);
-            string textFromFile = reader.ReadToEnd();
-            heroes = JsonConvert.DeserializeObject<List<HeroObject>>(textFromFile);
-            return heroes;
         }
     }
 }
