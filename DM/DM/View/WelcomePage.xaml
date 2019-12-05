@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:local="clr-namespace:DM.Help"
+             mc:Ignorable="d"
+             x:Class="DM.View.WelcomePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:RankConverter x:Key="rankConverter"/>
+            <x:String x:Key="formatmmr">Mmr estimate: {0}</x:String>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" >
+                <ffimageloading:CachedImage x:Name = "Avatar" Source="{Binding Avatar}"/>
+                <StackLayout Orientation="Vertical">
+                    <Label x:Name = "Welcome_msg" Text="{Binding Profile.profile.personaname}"
+                           TextColor="Black" FontSize="Medium"/>
+                    <Label x:Name="MmrEstimate" Text="{Binding Profile.mmr_estimate.estimate}
+                        StringFormat={StaticResource formatmmr}}"
+                           TextColor="Gray" FontSize="Medium"/>
+                </StackLayout>
+                <ffimageloading:CachedImage x:Name = "Rank" Source="{Binding Profile,
+                                                    Converter={StaticResource rankConverter}}"/>
+            </StackLayout>
+            <Button x:Name= "ShowRecentMatchesBtn" Text = "Show recent matches " Command="{Binding ShowRecentMatchesCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

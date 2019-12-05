@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DM.View;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace DM
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new XF_LoginPage());
         }
 
         protected override void OnStart()
