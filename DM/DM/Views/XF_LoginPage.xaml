@@ -4,13 +4,16 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="DM.View.XF_LoginPage">
+             x:Class="DM.Views.XF_LoginPage">
     <ContentPage.Content>
         <StackLayout>
             <Entry x:Name = "Steam_ID" Placeholder = "Steam ID" Text="{Binding Steam_64_id}"
                     />
 
             <Button x:Name= "LoginBtn" Text = "Login " Command="{Binding LoginCommand}"
+                    />
+
+            <Button x:Name= "Login" Text = "Login Steam" Command="{Binding LoginSteamCommand}"
                     />
 
         </StackLayout>
