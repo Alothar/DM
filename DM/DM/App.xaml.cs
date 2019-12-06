@@ -97,7 +97,7 @@ namespace DM
             var dbHeroArray = from hero in db.Table<HeroesDB>()
                               select hero;
             if (heroes.Count > dbHeroArray.Count())
-                db.DropTable<Hero>();
+                db.DropTable<HeroesDB>();
             InitiateHeroesDB();
         }
 
