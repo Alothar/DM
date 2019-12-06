@@ -1,4 +1,4 @@
-﻿using DM.View;
+﻿using DM.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
