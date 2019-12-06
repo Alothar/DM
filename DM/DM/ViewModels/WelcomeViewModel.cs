@@ -3,7 +3,7 @@ using DM.JSON;
 using DM.REST;
 using System;
 using Xamarin.Forms;
-using DM.View;
+using DM.Views;
 using System.IO;
 using System.Collections.Generic;
 using System.Reflection;
