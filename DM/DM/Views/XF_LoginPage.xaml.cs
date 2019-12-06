@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace DM.View
+namespace DM.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class XF_LoginPage : ContentPage

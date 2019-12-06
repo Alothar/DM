@@ -10,7 +10,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static DM.App;
 
-namespace DM.View
+namespace DM.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RecentMatchesPage : ContentPage

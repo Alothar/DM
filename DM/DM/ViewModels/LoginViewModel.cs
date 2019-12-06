@@ -2,7 +2,7 @@
 using DM.ID_handler;
 using DM.JSON;
 using DM.REST;
-using DM.View;
+using DM.Views;
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -34,6 +34,13 @@ namespace DM.ViewModels
         }
 
         public Command LoginCommand => new Command(Login);
+
+        public Command LoginSteamCommand => new Command(LoginSteam);
+
+        private void LoginSteam()
+        {
+            App.Current.MainPage.Navigation.PushAsync(new WebLoginView());
+        }
 
         private void Login()
         {
