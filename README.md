@@ -1,2 +1,2 @@
-# DM_src
+# DM
 Repo for DM project sources
