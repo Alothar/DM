@@ -139,7 +139,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Heroes.json" />
     <EmbeddedResource Include="Resources\Heroes\app_assets_heroes_abaddon_full.png" />
     <EmbeddedResource Include="Resources\Heroes\app_assets_heroes_alchemist_full.png" />
     <EmbeddedResource Include="Resources\Heroes\app_assets_heroes_ancient_apparition_full.png" />
