@@ -8,10 +8,10 @@ namespace DM.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WelcomePage : ContentPage
     {
-        public WelcomePage(ProfileObject profile)
+        public WelcomePage()
         {
             InitializeComponent();
-            WelcomeViewModel welcomeViewModel = new WelcomeViewModel(profile);
+            WelcomeViewModel welcomeViewModel = new WelcomeViewModel();
             BindingContext = welcomeViewModel;
         }
     }
