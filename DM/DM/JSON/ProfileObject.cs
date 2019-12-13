@@ -8,7 +8,7 @@ namespace DM.JSON
     {
         public int account_id { get; set; }
         public string personaname { get; set; }
-        public object name { get; set; }
+        public string name { get; set; }
         public bool? plus { get; set; }
         public int cheese { get; set; }
         public string steamid { get; set; }
@@ -23,17 +23,19 @@ namespace DM.JSON
 
     public class MmrEstimate
     {
-        public int estimate { get; set; }
+        public int? estimate { get; set; }
+        public int? stdDev { get; set; }
+        public int? n { get; set; }
     }
 
     public class ProfileObject
     {
         public string tracked_until { get; set; }
-        public object solo_competitive_rank { get; set; }
-        public int? competitive_rank { get; set; }
-        public object leaderboard_rank { get; set; }
-        public Profile profile { get; set; }
+        public string solo_competitive_rank { get; set; }
+        public string competitive_rank { get; set; }
         public int? rank_tier { get; set; }
+        public int? leaderboard_rank { get; set; }
         public MmrEstimate mmr_estimate { get; set; }
+        public Profile profile { get; set; }
     }
 }
