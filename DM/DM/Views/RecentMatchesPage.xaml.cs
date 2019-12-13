@@ -15,10 +15,10 @@ namespace DM.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RecentMatchesPage : ContentPage
     {
-        public RecentMatchesPage(List<MatchCropped> recentMatches)
+        public RecentMatchesPage()
         {
             InitializeComponent();
-            RecentMatchesViewModel recentMatchesViewModel = new RecentMatchesViewModel(recentMatches);
+            RecentMatchesViewModel recentMatchesViewModel = new RecentMatchesViewModel();
             BindingContext = recentMatchesViewModel;
         }
     }

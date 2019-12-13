@@ -1,5 +1,8 @@
-﻿using DM.Help;
+﻿using DM.DB;
+using DM.Help;
+using DM.ID_handler;
 using DM.JSON;
+using DM.REST;
 using DM.ViewClasses;
 using Newtonsoft.Json;
 using SQLite;
@@ -16,27 +19,30 @@ namespace DM.ViewModels
 {
     class RecentMatchesViewModel
     {
-        public RecentMatchesViewModel(List<MatchCropped> recentMatches)
+        public RecentMatchesViewModel()
         {
-            RecentMatches = recentMatches;
-            initializeRecentMatches();
+            RestService rest = RestService.Instance;
+            RecentMatches = rest.GetPlayerRecentMatches(Id_holder.Instance.Steam32id + "/recentMatches"); ;
+            InitializeRecentMatches();
         }
         public List<MatchCropped> RecentMatches { get; set; }
-        public ObservableCollection<RecentMatch_to_display> RecentMacthesToDisplay { get; } = new ObservableCollection<RecentMatch_to_display>();
+        public ObservableCollection<RecentMatchToDisplay> RecentMacthesToDisplay { get; } = new ObservableCollection<RecentMatchToDisplay>();
 
-        private HeroesDB getHero(int heroID)
+        private HeroesDB GetHero(int heroID)
         {
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "HeroesSQLite.db3");
-            var db = new SQLiteConnection(dbPath);
-            var hero = db.Get<HeroesDB>(heroID);
-            return hero;
+            using (SQLiteConnection db = new SQLiteConnection(dbPath))
+            {
+                var hero = db.Get<HeroesDB>(heroID);
+                return hero;
+            }
         }
 
-        private void initializeRecentMatches()
+        private void InitializeRecentMatches()
         {
             foreach (MatchCropped match in RecentMatches)
             {
-                RecentMacthesToDisplay.Add(new RecentMatch_to_display(match, getHero(match.hero_id)));
+                RecentMacthesToDisplay.Add(new RecentMatchToDisplay(match, GetHero(match.hero_id)));
             }
         }
     }
