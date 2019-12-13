@@ -18,7 +18,7 @@ namespace DM.Views
     {
         private string current_url;
 
-        WebView webView = new WebView
+        readonly WebView webView = new WebView
         {
             Source = new UrlWebViewSource
             {
@@ -42,12 +42,9 @@ namespace DM.Views
                 current_url = e.Url;
                 if (current_url.Contains("https://www.opendota.com/players/"))
                 {
-                    RestService rest = RestService.Instance;
                     Id_holder.Instance.Steam32id = current_url.Split('/')[current_url.Split('/').Length - 1];
-                    ProfileObject player = rest.GetPlayerInfo(Id_holder.Instance.Steam32id);
-
                     App.Current.MainPage.Navigation.PopAsync();
-                    App.Current.MainPage.Navigation.PushAsync(new WelcomePage(player));
+                    App.Current.MainPage.Navigation.PushAsync(new WelcomePage());
                 }
             };
         }
