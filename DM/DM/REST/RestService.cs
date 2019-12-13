@@ -15,8 +15,10 @@ namespace DM.REST
 
         private RestService()
         {
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri("https://api.opendota.com/api/");
+            _client = new HttpClient
+            {
+                BaseAddress = new Uri("https://api.opendota.com/api/")
+            };
         }
 
         public ProfileObject GetPlayerInfo(string urlOptionalPart)
@@ -31,6 +33,18 @@ namespace DM.REST
             return profile;
         }
 
+        public WL GetWLInfo(string urlOptionalPart)
+        {
+            WL winloses = new WL();
+            Task<HttpResponseMessage> t = _client.GetAsync(_client.BaseAddress + "players/" + urlOptionalPart);
+            if (t.Result.IsSuccessStatusCode)
+            {
+                string result = t.Result.Content.ReadAsStringAsync().Result;
+                winloses = JsonConvert.DeserializeObject<WL>(result);
+            }
+            return winloses;
+        }
+
         public List<MatchCropped> GetPlayerRecentMatches(string urlOptionalPart)
         {
             List<MatchCropped> matchesList = new List<MatchCropped>();
@@ -39,7 +53,22 @@ namespace DM.REST
             {
                 matchesList = JsonConvert.DeserializeObject<List<MatchCropped>>(t.Result.Content.ReadAsStringAsync().Result);
             }
+            matchesList.TrimExcess();
+            matchesList.RemoveRange(10, matchesList.Count - 10);
             return matchesList;
+        }
+
+        public List<MostPlayedHero> GetPlayerMostPlayedHeroes(string urlOptionalPart)
+        {
+            List<MostPlayedHero> heroesList = new List<MostPlayedHero>();
+            Task<HttpResponseMessage> t = _client.GetAsync(_client.BaseAddress + "players/" + urlOptionalPart);
+            if (t.Result.IsSuccessStatusCode)
+            {
+                heroesList = JsonConvert.DeserializeObject<List<MostPlayedHero>>(t.Result.Content.ReadAsStringAsync().Result);
+            }
+            heroesList.TrimExcess();
+            heroesList.RemoveRange(10, heroesList.Count - 10);
+            return heroesList;
         }
 
         public List<Hero> GetHeroes()
