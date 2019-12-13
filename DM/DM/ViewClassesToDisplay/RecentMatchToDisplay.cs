@@ -1,4 +1,5 @@
-﻿using DM.JSON;
+﻿using DM.DB;
+using DM.JSON;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,9 +7,9 @@ using static DM.App;
 
 namespace DM.ViewClasses
 {
-    class RecentMatch_to_display
+    class RecentMatchToDisplay
     {
-        public RecentMatch_to_display(MatchCropped match, HeroesDB hero) 
+        public RecentMatchToDisplay(MatchCropped match, HeroesDB hero) 
         {
             this.match = match;
             this.hero = hero;
