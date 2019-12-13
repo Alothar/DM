@@ -10,10 +10,10 @@ using Xamarin.Forms.Xaml;
 namespace DM.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class XF_LoginPage : ContentPage
+    public partial class LoginPage : ContentPage
     {
-        private LoginViewModel loginViewModel = new LoginViewModel();
-        public XF_LoginPage()
+        private readonly LoginViewModel loginViewModel = new LoginViewModel();
+        public LoginPage()
         {
             InitializeComponent();
             BindingContext = loginViewModel;
