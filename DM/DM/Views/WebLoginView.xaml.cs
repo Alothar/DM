@@ -1,5 +1,6 @@
 ﻿using DM.ID_handler;
 using DM.JSON;
+using DM.MasterPage;
 using DM.REST;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace DM.Views
                 {
                     Id_holder.Instance.Steam32id = current_url.Split('/')[current_url.Split('/').Length - 1];
                     App.Current.MainPage.Navigation.PopAsync();
-                    App.Current.MainPage.Navigation.PushAsync(new WelcomePage());
+                    App.Current.MainPage = new MasterDetailPage_main();
                 }
             };
         }
