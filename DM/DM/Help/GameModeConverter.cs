@@ -10,7 +10,7 @@ namespace DM.Help
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string result = "Game mode: ";
+            string result = "";
             switch ((int)value)
             {
                 case 0:

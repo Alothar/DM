@@ -13,7 +13,7 @@ namespace DM.Help
         {
             var match = (MatchCropped)value;
             double kda = (match.kills + match.assists)/ (double)match.deaths;
-            return string.Format("KDA: {0}", Math.Round(kda, 1));
+            return string.Format("{0}", Math.Round(kda, 1));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
