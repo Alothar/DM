@@ -10,7 +10,7 @@ namespace DM.Help
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string result = "Lobby type: ";
+            string result = "";
             switch ((int)value) 
             {
                 case 0:

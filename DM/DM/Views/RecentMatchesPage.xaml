@@ -22,8 +22,6 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Recent Matches" HorizontalOptions="CenterAndExpand"
-                   TextColor="Black" FontSize="Medium"/>
             <ListView x:Name="RecentMacthesList" ItemsSource="{Binding RecentMacthesToDisplay}" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>

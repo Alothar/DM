@@ -10,8 +10,7 @@ namespace DM.Help
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return string.Format("{0:00}:{1:00}:{2:00}", (int)value/3600, ((int)value/60)%60, (int)value%60);
-
+            return string.Format("{0:0}:{1:00}:{2:00}", (int)value/3600, ((int)value/60)%60, (int)value%60);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

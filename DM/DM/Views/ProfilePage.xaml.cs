@@ -6,12 +6,12 @@ using Xamarin.Forms.Xaml;
 namespace DM.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class WelcomePage : ContentPage
+    public partial class ProfilePage : ContentPage
     {
-        public WelcomePage()
+        public ProfilePage()
         {
             InitializeComponent();
-            WelcomeViewModel welcomeViewModel = new WelcomeViewModel();
+            ProfileViewModel welcomeViewModel = new ProfileViewModel();
             BindingContext = welcomeViewModel;
         }
     }

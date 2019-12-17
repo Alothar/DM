@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:local="clr-namespace:DM.Help"
+             mc:Ignorable="d"
+             x:Class="DM.Views.ProfilePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:RankConverter x:Key="rankConverter"/>
+            <local:WRConverter x:Key="winrateConverter"/>
+            <local:WinLoseConverter x:Key="winLoseConverter"/>
+            <local:ImagePathToImageSourceConverter x:Key="imagePathToImageConverter"/>
+            <local:MostPlayedHeroWRConverter x:Key="mostPlayedHeroWRConverter"/>
+            <local:TeamWonConverter x:Key="teamWon"/>
+            <local:DurationConverter x:Key="durationConverter"/>
+            <local:KDAConverter x:Key="kdaConverter"/>
+            <local:LobbyTypeConverter x:Key="lobbyTypeConverter"/>
+            <local:GameModeConverter x:Key="gameModeConverter"/>
+            <local:IsWonConverter x:Key="isWonConverter"/>
+            <local:SkillBracketConverter x:Key="skillBracketConverter"/>
+            <local:LastPlayedConverter x:Key="lastPlayedConverter"/>
+            <x:String x:Key="formatmmr">Mmr estimate: {0}</x:String>
+            <x:String x:Key="formatmatchid">Match id: {0}</x:String>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid x:Name="ViewGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="25*"/>
+                </Grid.ColumnDefinitions>
+                <ffimageloading:CachedImage Grid.Column="0" x:Name = "Avatar" Source="{Binding Avatar}"/>
+                <StackLayout Grid.Column="1" Orientation="Vertical" HorizontalOptions="Center">
+                    <Label x:Name = "Name" Text="{Binding Profile.profile.personaname}"
+                           TextColor="Black" FontSize="Small"/>
+                    <Label x:Name="MmrEstimate" Text="{Binding Profile.mmr_estimate.estimate}
+                        StringFormat={StaticResource formatmmr}}"
+                           TextColor="Gray" FontSize="Small"/>
+                    <Label x:Name="WR" Text="{Binding Winloses, Converter={StaticResource winrateConverter}}"
+                           FontSize="Small" TextColor="Black"/>
+                    <Label x:Name="WL" FormattedText="{Binding Winloses, Converter={StaticResource winLoseConverter}}"
+                           FontSize="Small"/>
+                </StackLayout>
+                <ffimageloading:CachedImage Grid.Column="2" x:Name = "Rank" Source="{Binding Profile,
+                                                    Converter={StaticResource rankConverter}}"/>
+            </Grid>
+            <Label Text="Most played heroes" HorizontalOptions="Center" FontSize="Medium" TextColor="Black"/>
+            <Grid x:Name="HeaderHeroesGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0">
+                    <Label Text="Hero" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout Grid.Column="1">
+                    <Label Text="Matches" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout Grid.Column="2">
+                    <Label Text="Win %" FontSize="Small"/>
+                </StackLayout>
+            </Grid>
+            <ListView x:Name="MostPlayedHeroesList" ItemsSource="{Binding MostPlayedHeroesToDisplay}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid x:Name="CellGrid">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*"/>
+                                    <ColumnDefinition Width="25*"/>
+                                    <ColumnDefinition Width="25*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                    <ffimageloading:CachedImage x:Name = "HeroAvatar" Source="{Binding hero.Resource,
+                                                    Converter={StaticResource imagePathToImageConverter}}"
+                                                                WidthRequest="50" HeightRequest="50"/>
+                                    <StackLayout Orientation="Vertical" VerticalOptions="Center">
+                                        <Label x:Name="HeroName" Text="{Binding hero.Localized_name}"
+                                                       TextColor="Black" FontSize="Small"/>
+                                        <Label x:Name="LastPlayed" Text="{Binding mpHero.last_played,
+                                            Converter={StaticResource lastPlayedConverter}}"
+                                               TextColor="Gray" FontSize="Small"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                    <Label x:Name="Games" Text="{Binding mpHero.games}"
+                                           FontSize="Small"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="2" Orientation="Horizontal">
+                                    <Label x:Name="Win" Text="{Binding mpHero, 
+                                        Converter={StaticResource mostPlayedHeroWRConverter}}"
+                                           FontSize="Small"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="Recent matches" HorizontalOptions="Center" FontSize="Medium" TextColor="Black"/>
+            <Grid x:Name="HeaderMatchesGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="22*"/>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0">
+                    <Label Text="Hero" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout Grid.Column="1">
+                    <Label Text="Result" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout Grid.Column="2">
+                    <Label Text="Type" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout Grid.Column="3">
+                    <Label Text="Duration" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout Grid.Column="4">
+                    <Label Text="KDA" FontSize="Small"/>
+                </StackLayout>
+            </Grid>
+            <ListView x:Name="RecentMacthesList" ItemsSource="{Binding RecentMacthesToDisplay}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid x:Name="CellGrid">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40*"/>
+                                    <ColumnDefinition Width="22*"/>
+                                    <ColumnDefinition Width="15*"/>
+                                    <ColumnDefinition Width="15*"/>
+                                    <ColumnDefinition Width="8*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Orientation="Horizontal" Grid.Column="0">
+                                    <ffimageloading:CachedImage x:Name = "HeroAvatar" Source="{Binding hero.Resource,
+                                        Converter={StaticResource imagePathToImageConverter}}"
+                                                                WidthRequest="50" HeightRequest="50"/>
+                                    <StackLayout Orientation="Vertical" VerticalOptions="Center">
+                                        <Label x:Name="HeroName" Text="{Binding hero.Localized_name}"
+                                                       TextColor="Black" FontSize="Small"/>
+                                        <Label x:Name="SkillBracket" Text="{Binding match,
+                                                Converter={StaticResource skillBracketConverter}}"
+                                               TextColor="Gray" FontSize="Small"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout Orientation="Vertical" Grid.Column="1" VerticalOptions="Center">
+                                    <Label x:Name="TeamWon" FormattedText="{Binding match, Converter={StaticResource isWonConverter}}"
+                                           FontSize="Small"/>
+                                    <Label x:Name="LastPlayed" Text="{Binding match.start_time,
+                                        Converter={StaticResource lastPlayedConverter}}"
+                                           TextColor="Gray" FontSize="Small"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="2" VerticalOptions="Center">
+                                    <Label x:Name="LobbyType" Text="{Binding match.lobby_type, Converter={StaticResource lobbyTypeConverter}}"
+                                                       FontSize="Small"/>
+                                    <Label x:Name="Mode" Text="{Binding match.game_mode, Converter={StaticResource gameModeConverter}}"
+                                                        FontSize="Small"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="3" VerticalOptions="Center">
+                                    <Label x:Name="Duration" Text="{Binding match.duration,
+                                        Converter={StaticResource durationConverter}}"
+                                           FontSize="Small"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="4" VerticalOptions="Center">
+                                    <Label x:Name="KDA" Text="{Binding match, Converter={StaticResource kdaConverter}}"
+                                           FontSize="Small"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

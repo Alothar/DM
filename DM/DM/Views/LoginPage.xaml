@@ -6,8 +6,18 @@
              mc:Ignorable="d"
              x:Class="DM.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center">
-            <Button x:Name= "Login" Text = "Login Steam" Command="{Binding LoginSteamCommand}" />
-        </StackLayout>
+        <Grid x:Name="LoginGrid" VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="90*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="1">
+                <Button x:Name= "Login" Text = "Login" Command="{Binding LoginSteamCommand}" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
