@@ -13,9 +13,9 @@ using static DM.App;
 namespace DM.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RecentMatchesPage : ContentPage
+    public partial class MatchesPage : ContentPage
     {
-        public RecentMatchesPage()
+        public MatchesPage()
         {
             InitializeComponent();
             RecentMatchesViewModel recentMatchesViewModel = new RecentMatchesViewModel();
